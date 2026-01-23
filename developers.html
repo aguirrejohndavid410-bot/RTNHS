@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developers Page</title>
+
+    <style>
+        :root {
+            --navy: #0b1c2d;
+            --mustard: #f2b705;
+            --light-bg: #f7f7f7;
+            --card-bg: #ffffff;
+            --text-dark: #333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            margin: 0;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--navy), #102a44);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 10px;
+            font-size: 2.3rem;
+        }
+
+        header p {
+            color: #ddd;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: var(--mustard);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 50px 20px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h2 {
+            color: var(--navy);
+            border-left: 6px solid var(--mustard);
+            padding-left: 12px;
+            margin-bottom: 30px;
+        }
+
+        /* SKILLS */
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .skills-list li {
+            background-color: var(--navy);
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.2s ease;
+        }
+
+        .skills-list li:hover {
+            transform: scale(1.05);
+        }
+
+        /* BIO CARDS */
+        .bio-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 30px;
+        }
+
+        .bio-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .bio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 35px rgba(0,0,0,0.12);
+        }
+
+        .bio-card img {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--mustard);
+            margin-bottom: 15px;
+        }
+
+        .bio-card h3 {
+            margin-bottom: 5px;
+            color: var(--navy);
+        }
+
+        .role {
+            color: var(--mustard);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* CONTACT FORM */
+        .contact-form {
+            background-color: var(--card-bg);
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .contact-form label {
+            font-weight: bold;
+            color: var(--navy);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--mustard);
+        }
+
+        .contact-form button {
+            background-color: var(--mustard);
+            color: var(--navy);
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .contact-form button:hover {
+            background-color: #d9a404;
+            transform: translateY(-2px);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--navy);
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Meet Our Development Team</h1>
+    <p>A group of passionate designers and developers creating modern, user-friendly experiences.</p>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="skills">
+    <h2>Skills</h2>
+    <ul class="skills-list">
+        <li>JavaScript</li>
+        <li>HTML & CSS</li>
+    </ul>
+</section>
+
+<section id="bio">
+    <h2>Meet the Developers</h2>
+    <div class="bio-cards">
+
+        <div class="bio-card">
+            <img src="images/developer (1).jfif" alt="Kristel Lourie Carillo">
+            <h3>Kristel Lourie Carillo</h3>
+            <p class="role">UI/UX Designer</p>
+            <p>Designs clean, user-friendly interfaces with strong attention to visual balance.</p>
+        </div>
+
+        <div class="bio-card">
+            <img src="images/developer (3).jfif" alt="John David Aguirre">
+            <h3>John David Aguirre</h3>
+            <p class="role">Frontend Developer</p>
+            <p>Focuses on responsive layouts, accessibility, and smooth user interactions.</p>
+        </div>
+
+        <div class="bio-card">
+            <img src="images/developer (2).jfif" alt="Jeremy Kyle Gaborno">
+            <h3>Jeremy Kyle Gaborno</h3>
+            <p class="role">UI/UX Designer</p>
+            <p>Creates intuitive designs that enhance usability and user satisfaction.</p>
+        </div>
+
+        <div class="bio-card">
+            <img src="images/developer (4).jfif" alt="Carmellie Legada">
+            <h3>Carmellie Legada</h3>
+            <p class="role">UI/UX Designer</p>
+            <p>Passionate about crafting visually appealing and easy-to-use interfaces.</p>
+        </div>
+
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p style="text-align:center;">Interested in collaborating? Send us a message!</p>
+
+    <form class="contact-form">
+        <label>Your Name</label>
+        <input type="text" placeholder="Your full name" required>
+
+        <label>Your Email</label>
+        <input type="email" placeholder="Your email address" required>
+
+        <label>Your Message</label>
+        <textarea rows="4" placeholder="Write your message here..." required></textarea>
+
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+<footer>
+    © 2026 Developer Team | Mustard & Navy Theme
+</footer>
+
+</body>
+</html>

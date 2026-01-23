@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramon Torres National High School | Contact Us</title>
+
+<style>
+:root {
+    --mustard: #f4c430;
+    --mustard-dark: #d4a017;
+    --navy: #0f2a44;
+    --navy-light: #163a5f;
+    --bg-light: #f6f7f9;
+    --text-dark: #333;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    margin: 0;
+    background: var(--bg-light);
+    color: var(--text-dark);
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, var(--mustard), var(--mustard-dark));
+    padding: 25px 20px;
+}
+
+.header-content {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-title h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.header-title p {
+    margin-top: 5px;
+    font-size: 0.95rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: #000;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    background: rgba(0,0,0,0.15);
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 0 20px;
+}
+
+/* CONTACT FORM */
+.contact-form {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.contact-form h2 {
+    color: var(--navy);
+}
+
+.contact-form label {
+    display: block;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    min-height: 150px;
+}
+
+.contact-form button {
+    margin-top: 18px;
+    background: var(--mustard);
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background: var(--mustard-dark);
+    color: white;
+}
+
+/* CONTACT CARD */
+.contact-card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-left: 6px solid var(--mustard);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.contact-card h2 {
+    margin-top: 0;
+    color: var(--navy);
+}
+
+.contact-info {
+    margin: 10px 0;
+}
+
+.label {
+    font-weight: bold;
+    color: var(--navy);
+}
+
+/* FOOTER */
+footer {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 40px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="header-content">
+        <div class="header-title">
+            <h1>Ramon Torres National High School</h1>
+            <p>Contact Information</p>
+        </div>
+        <nav>
+            <a href="index.html">Home</a>
+        </nav>
+    </div>
+</header>
+
+<div class="container">
+
+<!-- CONTACT FORM -->
+<div class="contact-form">
+    <h2>Send Us a Message</h2>
+
+    <label for="name">Full Name</label>
+    <input type="text" id="name" placeholder="Your Full Name" required>
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" placeholder="Your Email Address" required>
+
+    <label for="subject">Subject</label>
+    <input type="text" id="subject" placeholder="Subject" required>
+
+    <label for="message">Message</label>
+    <textarea id="message" placeholder="Write your message here..." required></textarea>
+
+    <button type="submit">Send Message</button>
+</div>
+
+<!-- CONTACT DETAILS -->
+<div class="contact-card">
+    <h2>Main Contact Details</h2>
+    <p class="contact-info"><span class="label">School Name:</span> Ramon Torres National High School</p>
+    <p class="contact-info"><span class="label">Address:</span> General Luna St., Brgy. Balingasag, Bago City, Negros Occidental</p>
+    <p class="contact-info"><span class="label">Telephone:</span> (034) 461-0167</p>
+    <p class="contact-info"><span class="label">Email:</span> info@rtnhs.edu.ph</p>
+    <p class="contact-info"><span class="label">Website:</span> www.rtnhs.edu.ph</p>
+</div>
+
+<!-- SCHOOL ADMINISTRATION -->
+<div class="contact-card">
+    <h2>School Administration</h2>
+    <p class="contact-info"><span class="label">Principal:</span> Dr. Jonaida V. Gaseno</p>
+    <p class="contact-info"><span class="label">Assistant Principal II (Operations):</span> Dr. Mary Jane A. Araneta</p>
+    <p class="contact-info"><span class="label">Assistant Principal (Academics):</span> Dr. Rizza N. Lavadia</p>
+</div>
+
+</div>
+
+<footer>
+© 2026 Ramon Torres National High School – All Rights Reserved
+</footer>
+
+</body>
+</html>

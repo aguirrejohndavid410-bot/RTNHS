@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Ramon Torres National High School</title>
-    <link rel="stylesheet" href="index.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+<meta charset="UTF-8">
+<link rel="stylesheet" href="index.css">
+<title>Ramon Torres National High School</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
 </head>
+
 <body>
+
+<!-- ===== HEADER (UNCHANGED) ===== -->
 <header>
     <div class="header-content">
-        <img src="logo.png" alt="Ramon Torres National High School Logo">
+        <img src="logo.png" alt="School Logo">
         <div>
             <h1>Ramon Torres National High School</h1>
             <p>Excellence • Discipline • Service</p>
@@ -18,153 +21,297 @@
     </div>
 </header>
 
+<!-- ===== NAV (UNCHANGED STRUCTURE) ===== -->
 <nav>
-    <a href="#about">About</a>
-    <a href="#mission">Mission & Vision</a>
-    <a href="#programs">Programs</a>
-    <a href="#contact">Contact</a>
+    <a href="news.html">News</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About Us</a>
+    <a href="developers.html">Developers</a>
 </nav>
 
+<!-- ===== SLIDER (UNCHANGED) ===== -->
+<div class="container slider-container">
+    <div class="banner"><img src="images/img1.jfif"></div>
+    <div class="banner"><img src="images/img2.jfif"></div>
+    <div class="banner"><img src="images/img3.jfif"></div>
+    <div class="banner"><img src="images/img4.jfif"></div>
+    <div class="banner"><img src="images/img5.jfif"></div>
+    <div class="banner"><img src="images/img6.jfif"></div>
 
-<div class="container">
-<div class="banner fade">
-    <img src="images/img1.jfif" alt="Ramon Torres National High School">
+    <div class="arrow-left" onclick="plusSlides(-1)">
+        <i class="fa-solid fa-arrow-left"></i>
+    </div>
+    <div class="arrow-right" onclick="plusSlides(1)">
+        <i class="fa-solid fa-arrow-right"></i>
+    </div>
 </div>
-
-<div class="banner fade">
-    <img src="images/img2.jfif" alt="Ramon Torres National High School">
-</div>
-
-<div class="banner fade">
-    <img src="images/img3.jfif" alt="Ramon Torres National High School">
-</div>
-
-<div class="banner fade">
-    <img src="images/img4.jfif" alt="Ramon Torres National High School">
-</div>
-
-<div class="banner fade">
-    <img src="images/img5.jfif" alt="Ramon Torres National High School">
-</div>
-
-<div class="banner fade">
-    <img src="images/img6.jfif" alt="Ramon Torres National High School">
-</div>
-
 
 <div style="text-align:center">
-  <span class="dot active" onclick="currentSlide(1)"></span>
-  <span class="dot" onclick="currentSlide(2)"></span>
-  <span class="dot" onclick="currentSlide(3)"></span>
-  <span class="dot" onclick="currentSlide(4)"></span>
-  <span class="dot" onclick="currentSlide(5)"></span>
-  <span class="dot" onclick="currentSlide(6)"></span>
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
 </div>
 
-<div class="arrow-left" onclick="plusSlides(-1)"><i class="fa-solid fa-arrow-left"></i></div></div>
-<div class="arrow-right" onclick="plusSlides(1)"><i class="fa-solid fa-arrow-right"></i></div></div>
+<!-- ===== STYLES ===== -->
+<style>
+:root {
+    --yellow: #f2b705;
+    --dark-yellow: #d9a404;
+    --navy: #0b1c2d;
+    --navy-light: #12314f;
+    --bg-light: #f7f7f7;
+    --text-dark: #333;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+/* NAV */
+nav {
+    background: var(--navy-light);
+    text-align: center;
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+nav a:hover {
+    background: var(--yellow);
+    color: var(--navy);
+}
+
+/* CONTAINER */
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* SECTIONS */
+section {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    color: var(--navy);
+    margin-bottom: 12px;
+    border-bottom: 3px solid var(--yellow);
+    display: inline-block;
+    padding-bottom: 6px;
+    font-size: 1.6rem;
+}
+
+/* ABOUT */
+.about-text {
+    font-size: 1.05rem;
+    max-width: 800px;
+}
+
+/* PROGRAMS */
+.programs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.program-card {
+    background: white;
+    border-left: 6px solid var(--yellow);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.program-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+.program-card h3 {
+    color: var(--navy-light);
+}
+
+/* NEWS */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.news-item {
+    display: flex;
+    gap: 15px;
+    background: white;
+    border-left: 5px solid var(--navy);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+.news-item img,
+.news-item video {
+    width: 400px;
+    border-radius: 8px;
+}
+
+.news-details h4 {
+    margin: 5px 0;
+    color: var(--navy-light);
+}
+
+.news-date {
+    color: var(--dark-yellow);
+    font-size: 0.85rem;
+}
+
+/* QUICK LINKS */
+.quick-links {
+    display: flex;
+    justify-content: center;
+}
+
+.quick-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--navy);
+    color: white;
+    padding: 14px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    transition: background 0.3s, transform 0.3s;
+}
+
+.quick-links a:hover {
+    background: var(--yellow);
+    color: var(--navy);
+    transform: translateY(-3px);
+}
+
+/* SLIDER (UNCHANGED FUNCTIONALITY) */
+.slider-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.slider-container .banner {
+    display: none;
+}
+.slider-container .banner img {
+    width: 100%;
+    height: 450px;
+    object-fit: contain;
+    background: var(--navy-light);
+}
+
+/* FOOTER */
+footer {
+    background: var(--navy);
+    color: white;
+    text-align: center;
+    padding: 18px;
+    font-size: 0.9rem;
+    margin-top: 40px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .news-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    .news-item img,
+    .news-item video {
+        width: 100%;
+    }
+}
+</style>
+
+<!-- ===== CONTENT ===== -->
+<div class="container">
+
+<section>
+    <div class="section-title">About Us</div>
+    <p class="about-text">
+        Ramon Torres National High School is a leading public secondary school in Bago City,
+        committed to nurturing students into responsible, competent learners and future leaders.
+    </p>
+</section>
+
+<section>
+    <div class="section-title">Programs & Tracks</div>
+    <div class="programs">
+        <div class="program-card">
+            <h3>Academic Track</h3>
+            <p>STEM, ABM, HUMSS, GAS — academic strands for senior high learners.</p>
+        </div>
+        <div class="program-card">
+            <h3>Technical-Vocational-Livelihood</h3>
+            <p>TVL strands like Cookery, EIM, SMAW and more for skills development.</p>
+        </div>
+        <div class="program-card">
+            <h3>Senior High School</h3>
+            <p>Grade 11–12 preparation for college, employment, and entrepreneurship.</p>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="section-title">Latest News</div>
+    <div class="news-list">
+        <div class="news-item">
+            <video src="images/vid1.mp4" controls></video>
+            <div class="news-details">
+                <div class="news-date">January 6, 2026</div>
+                <h4>Opening of School Year 2026–2027</h4>
+                <p>The new academic year officially began (enroll now people!!!).</p>
+            </div>
+        </div>
+
+        <div class="news-item">
+            <img src="images/MISSU.jpg">
+            <div class="news-details">
+                <div class="news-date">June 3, 2025</div>
+                <h4>Brigada Eskwela</h4>
+                <p>Come and join our brigada eskwela now!!!!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="section-title">Quick Links</div>
+    <div class="quick-links">
+        <a href="https://www.facebook.com/rtnhsdocuteam" target="_blank" aria-label="RTNHS Facebook Page">
+            <i class="fa-brands fa-facebook"></i>
+            RTNHS Docu Team Facebook
+        </a>
+    </div>
+</section>
+
 </div>
-
-
-<section id="about">
-    <h2>About Our School</h2>
-   <ul>
-        Ramon Torres National High School (RTNHS) is a public secondary school located in Bago City, Negros Occidental, Philippines, offering grades 7 to 12 under the Department of Education’s K-12 Basic Education Program.
-        <br>
-
-Founded in 1947, the school is named after its chief founder, Ex-Senator Ramon Torres, and has grown into one of the major public high schools in the area.
-<br>
-
-🎓 Senior High School Program
-<br>
-
-RTNHS has a Senior High School (SHS) program for Grades 11 and 12, designed to prepare students for college, employment, or entrepreneurship.
-<br>
-
-The SHS program includes:
-<br>
-
-
-📌 Core SHS Subjects
-<br>
-Oral Communication
-<br>
-General Mathematics
-<br>
-Science and Technology
-<br>
-Personal Development
-<br>
-21st Century Communication Skills<br>
-(All learners take these foundational courses.)
-<br>
-
-    </ul>
-</section>
-
-<section id="mission">
-    <h2>Mission</h2>
-    <p>
-        To provide learners with quality, accessible, and relevant education that
-        develops their knowledge, skills, values, and love for country.
-    </p>
-
-    <h2>Vision</h2>
-    <p>
-        Ramon Torres National High School envisions empowered learners who are
-        responsible, competent, and ready to face future challenges.
-    </p>
-    
-    <h2>Core values</h2>
-   <ul>
-        Maka-Diyos<br>
-        Maka-Tao<br>
-        Maka-Kalikasan<br>
-        Maka-Bansa<br>
-   </ul>
-</section>
-
-<section id="programs">
-    <h2>Academic Programs</h2>
-    <ul>
-        📌 Academic Track Strands
-<br>
-STEM – Science, Technology, Engineering, Mathematics
-<br>
-ABM – Accountancy, Business, Management
-<br>
-HUMSS – Humanities and Social Sciences
-<br>
-GAS – General Academic Strand<br>
-These strands help students focus on areas that match their interests and future plans.
-<br>
-📌 Technical-Vocational-Livelihood (TVL) Track<br>
-Students can also choose TVL strands that develop practical skills for employment or certification, such as:
-<br>
-Cookery
-<br>
-Tailoring
-<br>
-Electrical Installation & Maintenance (EIM)
-<br>
-Shielded Metal Arc Welding (SMAW)<br>
-These provide hands-on training and prepare learners for work or national certification.
-<br>
-📌 Immersion and Work Exposure<br>
-RTNHS SHS students also undergo work immersion with partner organizations to gain real-world experience before graduation.
-    </ul>
-</section>
-
-<section id="contact">
-    <h2>Contact Us</h2>
-    <p><strong>Address:</strong>Gen. Luna St., Balingasag, Bago city, Negros Occidental</p>
-    <p><strong>Email:</strong> rtnhs@gmail.com</p>
-    <p><strong>Phone:</strong>(034) 461 0167</p>
-</section>
 
 <footer>
-    <p>© 2026 Ramon Torres National High School | All Rights Reserved</p>
+    © 2026 Ramon Torres National High School – All Rights Reserved.
 </footer>
+
 <script src="index.js"></script>
 </body>
 </html>
