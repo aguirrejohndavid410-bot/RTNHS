@@ -3,221 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramon Torres National High School | Contact Us</title>
+<title>RTNHS | Contact Us</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 <style>
 :root {
-    --mustard: #f4c430;
-    --mustard-dark: #d4a017;
-    --navy: #0f2a44;
-    --navy-light: #163a5f;
-    --bg-light: #f6f7f9;
-    --text-dark: #333;
+    --primary-gold: #f4c430;
+    --gold-gradient: linear-gradient(135deg, #f4c430, #ffd700);
+    --dark-navy: #0f2a44;
+    --navy-light: #1a3a5c;
 }
 
-* { box-sizing: border-box; }
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
 
+/* BODY */
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    margin: 0;
-    background: var(--bg-light);
-    color: var(--text-dark);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg,#0a1929,#1a2332,#0a1929);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-/* HEADER */
-header {
-    background: linear-gradient(135deg, var(--mustard), var(--mustard-dark));
-    padding: 25px 20px;
+@keyframes gradientShift {
+    0%,100% { background-position:0% 50%; }
+    50% { background-position:100% 50%; }
 }
 
-.header-content {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
+/* PARTICLES */
+#particleCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    opacity: .3;
 }
 
-.header-title h1 {
-    margin: 0;
-    font-size: 1.8rem;
+/* ORBS */
+.gradient-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+.orb {
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.15;
+    animation: float-orb 25s infinite ease-in-out;
+}
+.orb-1 {width:400px;height:400px;background:#f4c430;top:10%;left:-100px;}
+.orb-2 {width:500px;height:500px;background:#ffd700;bottom:10%;right:-150px;}
+.orb-3 {width:350px;height:350px;background:#1a3a5c;top:50%;left:50%;}
+.orb-4 {width:450px;height:450px;background:#f4c430;bottom:30%;left:20%;}
+
+@keyframes float-orb {
+    50% { transform: translate(120px,-80px) scale(1.1); }
 }
 
-.header-title p {
-    margin-top: 5px;
-    font-size: 0.95rem;
+/* TOP NAV */
+.top-nav {
+    position: fixed;
+    top:0;
+    width:100%;
+    background: rgba(15,42,68,.95);
+    backdrop-filter: blur(15px);
+    padding: 20px 40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:1000;
+    box-shadow: 0 5px 30px rgba(0,0,0,.3);
 }
 
-nav a {
-    text-decoration: none;
-    color: #000;
-    font-weight: 600;
-    padding: 8px 14px;
-    border-radius: 5px;
+.nav-logo {
+    font-size:1.4rem;
+    font-weight:800;
+    background: var(--gold-gradient);
+    background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-nav a:hover {
-    background: rgba(0,0,0,0.15);
+.home-link {
+    color: var(--dark-navy);
+    background: var(--gold-gradient);
+    padding:12px 30px;
+    border-radius:50px;
+    font-weight:700;
+    text-decoration:none;
+    transition:.4s;
 }
 
-/* CONTAINER */
+.home-link:hover {
+    transform: translateY(-5px);
+    box-shadow:0 10px 40px rgba(244,196,48,.6);
+}
+
+/* MAIN CONTAINER */
 .container {
-    max-width: 1000px;
-    margin: 35px auto;
-    padding: 0 20px;
+    max-width:1000px;
+    margin:140px auto 80px;
+    padding:0 20px;
 }
 
-/* CONTACT FORM */
-.contact-form {
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
+/* GLASS CARD */
+.glass-card {
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(14px);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:35px;
+    border:2px solid rgba(244,196,48,.25);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    animation: fadeUp .8s ease both;
 }
 
-.contact-form h2 {
-    color: var(--navy);
+@keyframes fadeUp {
+    from {opacity:0; transform:translateY(40px)}
+    to {opacity:1; transform:translateY(0)}
 }
 
-.contact-form label {
-    display: block;
-    font-weight: 600;
-    margin-top: 15px;
+.glass-card h2 {
+    color: var(--primary-gold);
+    margin-bottom:15px;
 }
 
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-top: 6px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
+/* FORM */
+label {
+    font-weight:600;
+    margin-top:15px;
+    display:block;
 }
 
-.contact-form textarea {
-    min-height: 150px;
+input, textarea {
+    width:100%;
+    margin-top:6px;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    font-size:1rem;
 }
 
-.contact-form button {
-    margin-top: 18px;
-    background: var(--mustard);
-    border: none;
-    padding: 12px 20px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
+textarea { min-height:150px; }
+
+button {
+    margin-top:20px;
+    background: var(--gold-gradient);
+    border:none;
+    padding:14px 25px;
+    border-radius:50px;
+    font-size:1.1rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
 }
 
-.contact-form button:hover {
-    background: var(--mustard-dark);
-    color: white;
+button:hover {
+    transform: translateY(-4px);
+    box-shadow:0 10px 30px rgba(244,196,48,.6);
 }
 
-/* CONTACT CARD */
-.contact-card {
-    background: white;
-    padding: 25px;
-    margin-bottom: 25px;
-    border-left: 6px solid var(--mustard);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* INFO TEXT */
+.info p {
+    margin:10px 0;
 }
 
-.contact-card h2 {
-    margin-top: 0;
-    color: var(--navy);
-}
-
-.contact-info {
-    margin: 10px 0;
-}
-
-.label {
-    font-weight: bold;
-    color: var(--navy);
+.info span {
+    color: var(--primary-gold);
+    font-weight:700;
 }
 
 /* FOOTER */
 footer {
-    background: var(--navy);
-    color: white;
-    text-align: center;
-    padding: 18px;
-    margin-top: 40px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 600px) {
-    .header-content {
-        flex-direction: column;
-        text-align: center;
-    }
+    background:#0f2a44;
+    text-align:center;
+    padding:20px;
+    opacity:.8;
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="header-content">
-        <div class="header-title">
-            <h1>Ramon Torres National High School</h1>
-            <p>Contact Information</p>
-        </div>
-        <nav>
-            <a href="index.html">Home</a>
-        </nav>
+<canvas id="particleCanvas"></canvas>
+
+<div class="gradient-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+</div>
+
+<!-- NAV -->
+<div class="top-nav">
+    <div class="nav-logo">
+        <i class="fas fa-envelope"></i>
+        RTNHS Contact
     </div>
-</header>
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i> Home
+    </a>
+</div>
 
 <div class="container">
 
 <!-- CONTACT FORM -->
-<div class="contact-form">
+<div class="glass-card">
     <h2>Send Us a Message</h2>
 
-    <label for="name">Full Name</label>
-    <input type="text" id="name" placeholder="Your Full Name" required>
+    <label>Full Name</label>
+    <input type="text" placeholder="Your Full Name">
 
-    <label for="email">Email Address</label>
-    <input type="email" id="email" placeholder="Your Email Address" required>
+    <label>Email Address</label>
+    <input type="email" placeholder="Your Email Address">
 
-    <label for="subject">Subject</label>
-    <input type="text" id="subject" placeholder="Subject" required>
+    <label>Subject</label>
+    <input type="text" placeholder="Subject">
 
-    <label for="message">Message</label>
-    <textarea id="message" placeholder="Write your message here..." required></textarea>
+    <label>Message</label>
+    <textarea placeholder="Write your message here..."></textarea>
 
-    <button type="submit">Send Message</button>
+    <button>Send Message</button>
 </div>
 
 <!-- CONTACT DETAILS -->
-<div class="contact-card">
+<div class="glass-card info">
     <h2>Main Contact Details</h2>
-    <p class="contact-info"><span class="label">School Name:</span> Ramon Torres National High School</p>
-    <p class="contact-info"><span class="label">Address:</span> General Luna St., Brgy. Balingasag, Bago City, Negros Occidental</p>
-    <p class="contact-info"><span class="label">Telephone:</span> (034) 461-0167</p>
-    <p class="contact-info"><span class="label">Email:</span> info@rtnhs.edu.ph</p>
-    <p class="contact-info"><span class="label">Website:</span> www.rtnhs.edu.ph</p>
+    <p><span>School Name:</span> Ramon Torres National High School</p>
+    <p><span>Address:</span> General Luna St., Brgy. Balingasag, Bago City</p>
+    <p><span>Telephone:</span> (034) 461-0167</p>
+    <p><span>Email:</span> info@rtnhs.edu.ph</p>
+    <p><span>Website:</span> www.rtnhs.edu.ph</p>
 </div>
 
-<!-- SCHOOL ADMINISTRATION -->
-<div class="contact-card">
+<!-- ADMIN -->
+<div class="glass-card info">
     <h2>School Administration</h2>
-    <p class="contact-info"><span class="label">Principal:</span> Dr. Jonaida V. Gaseno</p>
-    <p class="contact-info"><span class="label">Assistant Principal II (Operations):</span> Dr. Mary Jane A. Araneta</p>
-    <p class="contact-info"><span class="label">Assistant Principal (Academics):</span> Dr. Rizza N. Lavadia</p>
+    <p><span>Principal:</span> Dr. Jonaida V. Gaseno</p>
+    <p><span>Assistant Principal II (Operations):</span> Dr. Mary Jane A. Araneta</p>
+    <p><span>Assistant Principal (Academics):</span> Dr. Rizza N. Lavadia</p>
 </div>
 
 </div>
 
 <footer>
-© 2026 Ramon Torres National High School – All Rights Reserved
+© 2026 Ramon Torres National High School
 </footer>
+
+<script>
+const canvas=document.getElementById("particleCanvas"),ctx=canvas.getContext("2d");
+canvas.width=innerWidth; canvas.height=innerHeight;
+let p=[];
+for(let i=0;i<50;i++) p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*3});
+function anim(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+p.forEach(a=>{
+a.x+=.3;a.y+=.3;
+if(a.x>innerWidth)a.x=0;
+if(a.y>innerHeight)a.y=0;
+ctx.fillStyle="rgba(244,196,48,.4)";
+ctx.beginPath();
+ctx.arc(a.x,a.y,a.s,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(anim);
+}
+anim();
+</script>
 
 </body>
 </html>

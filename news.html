@@ -1,284 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramon Torres National High School | News</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTNHS | News & Updates</title>
 
-    <style>
-        :root {
-            --yellow: #f4c430;
-            --dark-yellow: #d4a017;
-            --navy: #0f2a44;
-            --navy-light: #163a5f;
-            --bg-light: #f6f7f9;
-            --text-dark: #333;
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-        * {
-            box-sizing: border-box;
-        }
+<style>
+:root{
+    --navy:#0b1c2d;
+    --navy-light:#12314f;
+    --mustard:#f2b705;
+    --card-bg:rgba(255,255,255,.95);
+}
 
-        body {
-            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-            margin: 0;
-            background: linear-gradient(
-                180deg,
-                #f6f7f9 0%,
-                #eef1f5 50%,
-                #e6ebf2 100%
-            );
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
+/* RESET */
+*{box-sizing:border-box;margin:0;padding:0}
 
-        /* HEADER */
-        header {
-            background: linear-gradient(
-                135deg,
-                var(--yellow) 0%,
-                var(--dark-yellow) 60%,
-                #b8890f 100%
-            );
-            padding: 30px 20px;
-            text-align: center;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-        }
+body{
+    font-family:"Segoe UI",Tahoma,sans-serif;
+    color:#222;
+    line-height:1.6;
+    overflow-x:hidden;
+}
 
-        header h1 {
-            margin: 0;
-            font-size: 2rem;
-            color: #000;
-        }
+/* ===== ANIMATED BACKGROUND ===== */
+.bg-animation{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:linear-gradient(135deg,#0b1c2d,#12314f,#0b1c2d);
+    background-size:400% 400%;
+    animation:bgShift 15s ease infinite;
+}
+@keyframes bgShift{
+    0%,100%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+}
+.bg-animation::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(242,183,5,.12), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(242,183,5,.1), transparent 45%);
+    animation:float 20s ease-in-out infinite;
+}
+@keyframes float{
+    50%{transform:translateY(-20px)}
+}
 
-        header p {
-            margin-top: 8px;
-            font-size: 1rem;
-            color: #222;
-        }
+/* ===== HEADER ===== */
+header{
+    text-align:center;
+    padding:90px 20px;
+    color:white;
+}
+header h1{
+    font-size:3rem;
+    text-shadow:0 5px 25px rgba(242,183,5,.4);
+}
+header p{
+    max-width:600px;
+    margin:10px auto 0;
+    color:#ddd;
+}
 
-        /* NAVIGATION */
-        nav {
-            background-color: var(--navy);
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            padding: 12px 0;
-        }
+/* NAV */
+nav{
+    margin-top:30px;
+}
+nav a{
+    color:var(--mustard);
+    border:2px solid var(--mustard);
+    padding:12px 30px;
+    border-radius:50px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:.3s;
+}
+nav a:hover{
+    background:var(--mustard);
+    color:var(--navy);
+    box-shadow:0 8px 25px rgba(242,183,5,.4);
+}
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 5px 15px;
-            font-weight: 600;
-            padding: 8px 14px;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
+/* ===== NEWS SECTION ===== */
+section{
+    max-width:1200px;
+    margin:auto;
+    padding:60px 20px;
+}
+h2{
+    color:white;
+    text-align:center;
+    font-size:2.4rem;
+    margin-bottom:50px;
+}
+h2::after{
+    content:"";
+    display:block;
+    width:100px;
+    height:4px;
+    margin:12px auto 0;
+    background:linear-gradient(90deg,transparent,var(--mustard),transparent);
+}
 
-        nav a:hover {
-            background-color: var(--yellow);
-            color: #000;
-        }
+/* NEWS GRID */
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:40px;
+}
 
-        /* MAIN CONTAINER */
-        .container {
-            max-width: 1100px;
-            margin: 35px auto;
-            padding: 25px 20px;
-            background: rgba(255, 255, 255, 0.35);
-            backdrop-filter: blur(4px);
-            border-radius: 12px;
-        }
+/* NEWS CARD */
+.news-card{
+    background:var(--card-bg);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,.25);
+    transition:.4s cubic-bezier(.175,.885,.32,1.275);
+    cursor:pointer;
+    position:relative;
+}
+.news-card:hover{
+    transform:translateY(-15px) scale(1.03);
+    box-shadow:0 30px 80px rgba(242,183,5,.35);
+}
 
-        /* NEWS CARD */
-        .news-item {
-            background: linear-gradient(
-                180deg,
-                #ffffff 0%,
-                #fafafa 100%
-            );
-            margin-bottom: 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
+/* IMAGE */
+.news-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    transition:.6s ease;
+}
+.news-card:hover img{
+    transform:scale(1.1);
+}
 
-        .news-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.15);
-        }
+/* CONTENT */
+.news-content{
+    padding:30px;
+}
+.news-content h3{
+    color:var(--navy);
+    margin-bottom:10px;
+}
+.news-date{
+    font-size:.85rem;
+    color:#777;
+    margin-bottom:12px;
+}
 
-        .news-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
+/* RIPPLE */
+.ripple{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(242,183,5,.4);
+    transform:scale(0);
+    animation:ripple .6s ease-out;
+    pointer-events:none;
+}
+@keyframes ripple{
+    to{transform:scale(4);opacity:0}
+}
 
-        .news-content {
-            padding: 25px;
-        }
-
-        .news-content h2 {
-            margin-top: 0;
-            color: var(--navy);
-            font-size: 1.4rem;
-        }
-
-        .date {
-            font-size: 0.85rem;
-            color: #777;
-            margin-bottom: 12px;
-        }
-
-        /* FOOTER */
-        footer {
-            background: linear-gradient(
-                135deg,
-                var(--navy),
-                var(--navy-light)
-            );
-            color: white;
-            text-align: center;
-            padding: 18px;
-            margin-top: 40px;
-            font-size: 0.9rem;
-        }
-
-        /* CAROUSEL */
-        .carousel-container {
-            position: relative;
-            max-width: 100%;
-            height: 400px;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-
-        .carousel-images {
-            display: flex;
-            transition: transform 0.5s ease;
-        }
-
-        .carousel-images img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-        }
-
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            z-index: 1;
-        }
-
-        .carousel-nav button {
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #fff;
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-
-        .carousel-nav button:hover {
-            background-color: rgba(0, 0, 0, 0.7);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            header h1 {
-                font-size: 1.6rem;
-            }
-
-            .news-content {
-                padding: 18px;
-            }
-        }
-    </style>
+/* FOOTER */
+footer{
+    background:rgba(11,28,45,.95);
+    color:#ccc;
+    text-align:center;
+    padding:30px;
+    border-top:3px solid var(--mustard);
+}
+</style>
 </head>
+
 <body>
 
+<div class="bg-animation"></div>
+
 <header>
-    <h1>Ramon Torres National High School</h1>
-    <p>Official News and Updates</p>
+<h1>RTNHS News & Updates</h1>
+<p>Stay informed with the latest events, achievements, and announcements from our school.</p>
+<nav>
+<a href="index.html"><i class="fas fa-home"></i> Home</a>
+</nav>
 </header>
 
-<nav>
-    <a href="index.html">Home</a>
-    <a href="contact.html">Contact</a>
-</nav>
+<section>
+<h2>Latest News</h2>
 
-<div class="container">
+<div class="news-grid">
 
-    <!-- NEWS 1 -->
-    <div class="news-item">
-        <img src="images/news1.jpg" alt="Opening of School Year">
-        <div class="news-content">
-            <h2>Scouts Gear Up: Aspac Adventure Awaits!</h2>
-            <div class="date">Posted on December 13, 2025</div>
-            <p>
-                These scouts are ready to explore, learn, and make memories that will last a lifetime and en route to the Asia Pacific Regional Scout Jamboree...
-            </p>
-        </div>
-    </div>
-
-    <!-- NEWS 2 -->
-    <div class="news-item">
-        <div class="carousel-container">
-            <div class="carousel-images">
-                <img src="images/news2.jpg" alt="Brigada Eskwela">
-                <img src="images/new3.jpg" alt="Brigada Eskwela">
-                <img src="images/news4.jpg" alt="Brigada Eskwela">
-            </div>
-            <div class="carousel-nav">
-                <button class="prevBtn">&#10094;</button>
-                <button class="nextBtn">&#10095;</button>
-            </div>
-        </div>
-        <div class="news-content">
-            <h2>Values Education Department prepared plenty of games that surprised and challenged the recollectors in their groups during the Recollection Celebration...</h2>
-            <div class="date">Posted on December 5, 2025</div>
-            <p>
-                Brainstorming on the spot wasn’t easy, but the groups made it—through banner making, yells, and teamwork...
-            </p>
-        </div>
-    </div>
-
-    <!-- NEWS 3 -->
-    <div class="news-item">
-        <div class="carousel-container">
-            <div class="carousel-images">
-                <img src="images/news5.jpg" alt="Student Achievers">
-                <img src="images/news6.jpg" alt="Student Achievers">
-                <img src="images/news7.jpg" alt="Student Achievers">
-                <img src="images/news8.jpg" alt="Student Achievers">
-            </div>
-            <div class="carousel-nav">
-                <button class="prevBtn">&#10094;</button>
-                <button class="nextBtn">&#10095;</button>
-            </div>
-        </div>
-        <div class="news-content">
-            <h2>The Recollection spearheaded by the Values Education Department</h2>
-            <div class="date">Posted on November 29, 2025</div>
-            <p>
-                The Recollection spearheaded by the Values Education Department brought meaningful lessons to the RTNIANS during yesterday’s symposium...
-            </p>
-        </div>
-    </div>
-
+<div class="news-card">
+<img src="images/news1.jpg">
+<div class="news-content">
+<h3>Scouts Gear Up: ASPAC Adventure Awaits!</h3>
+<div class="news-date">December 13, 2025</div>
+<p>RTNHS scouts prepare for an unforgettable journey to the Asia-Pacific Scout Jamboree.</p>
+</div>
 </div>
 
+<div class="news-card">
+<img src="images/news2.jpg">
+<div class="news-content">
+<h3>Values Education Recollection</h3>
+<div class="news-date">December 5, 2025</div>
+<p>Students experienced teamwork, creativity, and reflection during the recollection celebration.</p>
+</div>
+</div>
+
+<div class="news-card">
+<img src="images/news5.jpg">
+<div class="news-content">
+<h3>Student Achievers Recognized</h3>
+<div class="news-date">November 29, 2025</div>
+<p>Outstanding students were recognized for their academic excellence and leadership.</p>
+</div>
+</div>
+
+</div>
+</section>
+
 <footer>
-    &copy; 2025 Ramon Torres National High School. All Rights Reserved.
+<p>© 2026 Ramon Torres National High School</p>
 </footer>
+
+<script>
+document.querySelectorAll(".news-card").forEach(card=>{
+    card.addEventListener("click",e=>{
+        const r=document.createElement("span");
+        r.className="ripple";
+        const b=card.getBoundingClientRect();
+        r.style.left=e.clientX-b.left+"px";
+        r.style.top=e.clientY-b.top+"px";
+        r.style.width=r.style.height="120px";
+        card.appendChild(r);
+        setTimeout(()=>r.remove(),600);
+    });
+});
+</script>
 
 </body>
 </html>

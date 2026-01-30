@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developers - RTNHS</title>
+    <!-- ✅ FIXED: Font Awesome CDN version corrected from 7.0.1 to 6.5.1 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        :root {
+            --navy: #0b1c2d;
+            --mustard: #f2b705;
+            --light-bg: #f7f7f7;
+            --card-bg: #ffffff;
+            --text-dark: #333;
+            --navy-light: #12314f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ANIMATED BACKGROUND */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #0b1c2d 0%, #12314f 50%, #0b1c2d 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(242, 183, 5, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(242, 183, 5, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(242, 183, 5, 0.08) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* HEADER */
+        header {
+            background: transparent;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(242, 183, 5, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        header h1 {
+            margin-bottom: 15px;
+            font-size: 3rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 20px rgba(242, 183, 5, 0.4);
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header p {
+            color: #ddd;
+            max-width: 600px;
+            margin: auto;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.3s backwards;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+
+        nav a {
+            color: var(--mustard);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: 2px solid var(--mustard);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: var(--mustard);
+            color: var(--navy);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(242, 183, 5, 0.3);
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: auto;
+            background: transparent;
+            position: relative;
+        }
+
+        h2 {
+            color: white;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--mustard), transparent);
+            border-radius: 2px;
+        }
+
+        /* SKILLS */
+        .skills-list {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .skills-list li {
+            background: linear-gradient(135deg, var(--mustard), #d9a404);
+            color: var(--navy);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(242, 183, 5, 0.3);
+            transition: all 0.3s ease;
+            animation: scaleIn 0.6s ease-out backwards;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-list li::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .skills-list li:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .skills-list li:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(242, 183, 5, 0.5);
+        }
+
+        .skills-list li:nth-child(1) { animation-delay: 0.8s; }
+        .skills-list li:nth-child(2) { animation-delay: 1s; }
+
+        /* BIO CARDS */
+        .bio-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 20px;
+        }
+
+        .bio-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.8s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(242, 183, 5, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .bio-card:hover::before {
+            left: 100%;
+        }
+
+        .bio-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(242, 183, 5, 0.3);
+        }
+
+        .bio-card:nth-child(1) { animation-delay: 1.2s; }
+        .bio-card:nth-child(2) { animation-delay: 1.4s; }
+        .bio-card:nth-child(3) { animation-delay: 1.6s; }
+        .bio-card:nth-child(4) { animation-delay: 1.8s; }
+
+        .bio-card .img-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .bio-card img {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--mustard);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(242, 183, 5, 0.4);
+        }
+
+        .bio-card:hover img {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(242, 183, 5, 0.6);
+        }
+
+        .bio-card h3 {
+            margin-bottom: 8px;
+            color: var(--navy);
+            font-size: 1.4rem;
+        }
+
+        .role {
+            color: var(--mustard);
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .bio-card p:last-child {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* CONTACT FORM */
+        .contact-form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            max-width: 700px;
+            margin: auto;
+            animation: scaleIn 1s ease-out 2s backwards;
+        }
+
+        .contact-form label {
+            font-weight: bold;
+            color: var(--navy);
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 25px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--mustard);
+            box-shadow: 0 0 0 3px rgba(242, 183, 5, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .contact-form button {
+            background: linear-gradient(135deg, var(--mustard), #d9a404);
+            color: var(--navy);
+            padding: 16px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 8px 25px rgba(242, 183, 5, 0.3);
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(242, 183, 5, 0.5);
+        }
+
+        .contact-form button:active {
+            transform: translateY(-1px);
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(11, 28, 45, 0.9);
+            color: #ccc;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 80px;
+            font-size: 0.95rem;
+            border-top: 3px solid var(--mustard);
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(80px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .bio-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+
+        /* FLOATING ICONS */
+        .floating-icons {
+            position: fixed;
+            top: 50%;
+            right: 30px;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 100;
+            animation: fadeInRight 1s ease-out 2.5s backwards;
+        }
+
+        .floating-icons a {
+            width: 50px;
+            height: 50px;
+            background: var(--mustard);
+            color: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(242, 183, 5, 0.4);
+        }
+
+        .floating-icons a:hover {
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 0 8px 25px rgba(242, 183, 5, 0.6);
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px) translateY(-50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) translateY(-50%);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-icons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="bg-animation"></div>
+
+<header>
+    <h1>Meet Our Development Team</h1>
+    <p>A passionate group of designers and developers crafting modern, user-friendly experiences with creativity and innovation.</p>
+    <nav>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="skills">
+    <h2>Our Core Skills</h2>
+    <ul class="skills-list">
+        <li><i class="fab fa-js-square"></i> JavaScript</li>
+        <li><i class="fab fa-html5"></i> HTML & CSS</li>
+    </ul>
+</section>
+
+<section id="bio">
+    <h2>Meet the Developers</h2>
+    <div class="bio-cards">
+
+        <div class="bio-card">
+            <div class="img-container">
+                <img src="images/developer (1).jfif" alt="Kristel Lourie Carillo">
+            </div>
+            <h3>Kristel Lourie Carillo</h3>
+            <p class="role"><i class="fas fa-palette"></i> UI/UX Designer</p>
+            <p>Designs clean, user-friendly interfaces with strong attention to visual balance and aesthetic harmony.</p>
+        </div>
+
+        <div class="bio-card">
+            <div class="img-container">
+                <img src="images/developer (3).jfif" alt="John David Aguirre">
+            </div>
+            <h3>John David Aguirre</h3>
+            <p class="role"><i class="fas fa-code"></i> Frontend Developer</p>
+            <p>Focuses on responsive layouts, accessibility, and creating smooth, engaging user interactions.</p>
+        </div>
+
+        <div class="bio-card">
+            <div class="img-container">
+                <img src="images/developer (2).jfif" alt="Jeremy Kyle Gaborno">
+            </div>
+            <h3>Jeremy Kyle Gaborno</h3>
+            <p class="role"><i class="fas fa-pen-nib"></i> UI/UX Designer</p>
+            <p>Creates intuitive designs that enhance usability and deliver exceptional user satisfaction.</p>
+        </div>
+
+        <div class="bio-card">
+            <div class="img-container">
+                <img src="images/developer (4).jfif" alt="Carmellie Legada">
+            </div>
+            <h3>Carmellie Legada</h3>
+            <p class="role"><i class="fas fa-paint-brush"></i> UI/UX Designer</p>
+            <p>Passionate about crafting visually appealing and easy-to-use interfaces that users love.</p>
+        </div>
+
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Get In Touch</h2>
+    <p style="text-align:center; color: white; font-size: 1.1rem; margin-bottom: 40px;">
+        Interested in collaborating? We'd love to hear from you!
+    </p>
+
+    <form class="contact-form">
+        <label><i class="fas fa-user"></i> Your Name</label>
+        <input type="text" placeholder="Enter your full name" required>
+
+        <label><i class="fas fa-envelope"></i> Your Email</label>
+        <input type="email" placeholder="Enter your email address" required>
+
+        <label><i class="fas fa-comment"></i> Your Message</label>
+        <textarea rows="5" placeholder="Write your message here..." required></textarea>
+
+        <button type="submit"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </form>
+</section>
+
+<div class="floating-icons">
+    <a href="#skills" title="Skills"><i class="fas fa-lightbulb"></i></a>
+    <a href="#bio" title="Team"><i class="fas fa-users"></i></a>
+    <a href="#contact" title="Contact"><i class="fas fa-envelope"></i></a>
+</div>
+
+<footer>
+    <p><i class="fas fa-heart" style="color: var(--mustard);"></i> © 2026 RTNHS Developer Team | Crafted with passion</p>
+</footer>
+
+<script>
+    // Scroll reveal animation
+    function reveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        
+        for (let i = 0; i < reveals.length; i++) {
+            const windowHeight = window.innerHeight;
+            const elementTop = reveals[i].getBoundingClientRect().top;
+            const elementVisible = 150;
+            
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add('active');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', reveal);
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Form submission handling
+    document.querySelector('.contact-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! We will get back to you soon.');
+        this.reset();
+    });
+
+    // Add floating animation to skill items
+    const skills = document.querySelectorAll('.skills-list li');
+    skills.forEach((skill, index) => {
+        skill.style.animation = `scaleIn 0.6s ease-out ${0.8 + index * 0.2}s backwards, float 3s ease-in-out ${index * 0.5}s infinite`;
+    });
+</script>
+
+</body>
+</html>

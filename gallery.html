@@ -1,437 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTNHS Gallery - Visual Experience</title>
+<!-- Fixed Font Awesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+</head>
+<body>
+
+<!-- Animated Particles Background -->
+<canvas id="particleCanvas"></canvas>
+
+<!-- Floating Gradient Orbs -->
+<div class="gradient-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+</div>
+
 <!-- ====== GALLERY STYLES ====== -->
 <style>
-    /* General Body */
-    body {
-        font-family: 'Arial', sans-serif;
-        background-color: #f4f4f4; /* light gray background */
+    :root {
+        --primary-gold: #f4c430;
+        --dark-navy: #0f2a44;
+        --navy-light: #1a3a5c;
+        --bg-gradient: linear-gradient(135deg, #0f2a44 0%, #1a3a5c 50%, #0f2a44 100%);
+        --gold-gradient: linear-gradient(135deg, #f4c430 0%, #ffd700 100%);
+    }
+
+    * {
         margin: 0;
         padding: 0;
-        color: #333;
+        box-sizing: border-box;
+    }
+
+    /* General Body */
+    body {
+        font-family: 'Segoe UI', 'Arial', sans-serif;
+        background: linear-gradient(135deg, #0a1929 0%, #1a2332 50%, #0a1929 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        overflow-x: hidden;
+        position: relative;
+        min-height: 100vh;
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    /* Particle Canvas */
+    #particleCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.3;
+    }
+
+    /* Gradient Orbs */
+    .gradient-orbs {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.15;
+        animation: float-orb 20s infinite ease-in-out;
+    }
+
+    .orb-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, #f4c430, transparent);
+        top: 10%;
+        left: -100px;
+        animation-duration: 25s;
+    }
+
+    .orb-2 {
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, #ffd700, transparent);
+        bottom: 10%;
+        right: -150px;
+        animation-duration: 30s;
+        animation-delay: 5s;
+    }
+
+    .orb-3 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, #1a3a5c, transparent);
+        top: 50%;
+        left: 50%;
+        animation-duration: 20s;
+        animation-delay: 10s;
+    }
+
+    .orb-4 {
+        width: 450px;
+        height: 450px;
+        background: radial-gradient(circle, #f4c430, transparent);
+        bottom: 30%;
+        left: 20%;
+        animation-duration: 28s;
+        animation-delay: 3s;
+    }
+
+    @keyframes float-orb {
+        0%, 100% {
+            transform: translate(0, 0) scale(1);
+        }
+        25% {
+            transform: translate(100px, -50px) scale(1.1);
+        }
+        50% {
+            transform: translate(-50px, 100px) scale(0.9);
+        }
+        75% {
+            transform: translate(150px, 50px) scale(1.05);
+        }
     }
 
     /* Gallery Section */
     .gallery-section {
-        max-width: 1000px;
-        margin: 40px auto;
-        padding: 0 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 40px 20px 80px 20px;
+        position: relative;
+        z-index: 1;
     }
 
-    /* Title Section */
-    .gallery-title-container {
+    /* Top Navigation Bar */
+    .top-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(15, 42, 68, 0.95);
+        backdrop-filter: blur(15px);
+        padding: 20px 40px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 30px;
+        z-index: 1000;
+        box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        animation: slideDown 0.8s ease-out;
     }
 
-    .gallery-title {
-        text-align: left;
-        color: #0f2a44; /* navy */
-        font-size: 2rem; /* larger size for emphasis */
-        font-weight: 700;
+    @keyframes slideDown {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .nav-logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-logo i {
+        color: var(--primary-gold);
+        font-size: 1.8rem;
+        animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
 
     .home-link {
-        font-size: 1.2rem;
-        color: #fff;
+        font-size: 1.1rem;
+        color: var(--dark-navy);
         text-decoration: none;
-        background-color: #f4c430; /* yellow */
-        padding: 12px 20px;
-        border-radius: 8px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
+        background: var(--gold-gradient);
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-weight: 700;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 5px 20px rgba(244, 196, 48, 0.4);
+    }
+
+    .home-link::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.5s, height 0.5s;
+    }
+
+    .home-link:hover::before {
+        width: 300px;
+        height: 300px;
     }
 
     .home-link:hover {
-        background-color: #0f2a44; /* navy blue on hover */
-        color: #fff;
-        transform: translateY(-2px);
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 10px 40px rgba(244, 196, 48, 0.6);
+    }
+
+    /* Title Section */
+    .gallery-header {
+        margin-top: 120px;
+        margin-bottom: 60px;
+        text-align: center;
+        animation: fadeInUp 1s ease-out 0.5s backwards;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .gallery-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: linear-gradient(45deg, #fff, var(--primary-gold), #fff);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: shine 3s linear infinite;
+        text-shadow: 0 0 50px rgba(244, 196, 48, 0.5);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+    }
+
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+
+    .gallery-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.7);
+        font-weight: 300;
+        letter-spacing: 2px;
+    }
+
+    .gallery-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 150px;
+        height: 4px;
+        background: var(--gold-gradient);
+        border-radius: 10px;
+        box-shadow: 0 0 20px var(--primary-gold);
     }
 
     /* Gallery Grid */
     .gallery-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 40px;
+        padding: 20px;
     }
 
     /* Gallery Item */
     .gallery-item {
-        border: 4px solid #f4c430; /* yellow */
-        border-radius: 12px;
+        position: relative;
+        border-radius: 25px;
         overflow: hidden;
-        background: #fff;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-        transition: transform 0.3s, box-shadow 0.3s;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        animation: scaleIn 0.6s ease-out backwards;
+        border: 2px solid rgba(244, 196, 48, 0.2);
+    }
+
+    .gallery-item:nth-child(1) { animation-delay: 0.8s; }
+    .gallery-item:nth-child(2) { animation-delay: 0.9s; }
+    .gallery-item:nth-child(3) { animation-delay: 1s; }
+    .gallery-item:nth-child(4) { animation-delay: 1.1s; }
+    .gallery-item:nth-child(5) { animation-delay: 1.2s; }
+    .gallery-item:nth-child(6) { animation-delay: 1.3s; }
+    .gallery-item:nth-child(7) { animation-delay: 1.4s; }
+
+    @keyframes scaleIn {
+        from {
+            opacity: 0;
+            transform: scale(0.8) rotate(-5deg);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+    }
+
+    .gallery-item::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(244, 196, 48, 0.2), transparent);
+        opacity: 0;
+        transition: opacity 0.5s, transform 0.8s;
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .gallery-item:hover::before {
+        opacity: 1;
+        transform: rotate(180deg);
     }
 
     .gallery-item:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 10px 25px rgba(15,42,68,0.3);
+        transform: translateY(-20px) scale(1.05);
+        box-shadow: 0 25px 80px rgba(244, 196, 48, 0.4);
+        border-color: var(--primary-gold);
     }
 
-    /* Gallery Item Image */
-    .gallery-item img, 
-    .gallery-item video {
+    /* Gallery Item Image Container */
+    .image-container {
+        position: relative;
+        overflow: hidden;
+        height: 280px;
+    }
+
+    .gallery-item img {
         width: 100%;
-        height: 220px;
+        height: 100%;
         object-fit: cover;
         display: block;
+        transition: transform 0.6s ease;
+        filter: brightness(0.9);
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.15) rotate(3deg);
+        filter: brightness(1.1);
+    }
+
+    /* Image Overlay */
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(15, 42, 68, 0.9), transparent);
+        opacity: 0;
+        transition: opacity 0.4s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+
+    .gallery-item:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .overlay-icon {
+        font-size: 3rem;
+        color: var(--primary-gold);
+        transform: scale(0);
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .gallery-item:hover .overlay-icon {
+        transform: scale(1) rotate(360deg);
     }
 
     /* Gallery Caption */
     .gallery-caption {
-        background: #0f2a44; /* navy */
+        background: linear-gradient(135deg, var(--dark-navy), var(--navy-light));
         color: #fff;
-        padding: 12px;
+        padding: 20px;
         text-align: center;
-        font-size: 1rem;
-        font-weight: 600;
+        font-size: 1.1rem;
+        font-weight: 700;
         text-transform: uppercase;
-    }
-
-    /* Carousel Container */
-    .carousel-container {
+        letter-spacing: 1px;
         position: relative;
-        max-width: 100%;
-        height: 220px;
-        overflow: hidden;
-        border-radius: 12px;
+        z-index: 2;
     }
 
-    /* Carousel Images */
-    .carousel-images {
-        display: flex;
-        transition: transform 0.5s ease;
-    }
-
-    .carousel-images img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-    }
-
-    /* Carousel Navigation */
-    .carousel-nav {
+    .gallery-caption::before {
+        content: '';
         position: absolute;
-        top: 50%;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: var(--gold-gradient);
+        transition: width 0.4s ease;
+        z-index: -1;
+    }
+
+    .gallery-item:hover .gallery-caption::before {
         width: 100%;
-        display: flex;
-        justify-content: space-between;
-        transform: translateY(-50%);
-        z-index: 1;
     }
 
-    .carousel-nav button {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        border: none;
-        padding: 12px;
+    .gallery-item:hover .gallery-caption {
+        color: var(--dark-navy);
+    }
+
+    /* Modal/Lightbox */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.97);
+        overflow: auto;
+        backdrop-filter: blur(10px);
+    }
+
+    .modal.active {
+        display: block;
+        animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        max-width: 1400px;
+        margin: 100px auto 50px auto;
+        padding: 40px;
+        animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Close Button */
+    .close-modal {
+        position: fixed;
+        top: 30px;
+        right: 50px;
+        color: var(--primary-gold);
+        font-size: 50px;
+        font-weight: bold;
         cursor: pointer;
+        z-index: 2001;
+        transition: all 0.3s;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(244, 196, 48, 0.1);
         border-radius: 50%;
-        transition: background-color 0.3s;
+        backdrop-filter: blur(10px);
     }
 
-    .carousel-nav button:hover {
-        background-color: rgba(0, 0, 0, 0.7);
+    .close-modal:hover {
+        color: #fff;
+        transform: rotate(90deg) scale(1.2);
+        background: var(--primary-gold);
+        box-shadow: 0 0 30px var(--primary-gold);
+    }
+
+    /* Modal Title */
+    .modal-title {
+        color: var(--primary-gold);
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        font-weight: 800;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+        text-shadow: 0 0 20px rgba(244, 196, 48, 0.5);
+    }
+
+    .modal-title::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: var(--gold-gradient);
+        border-radius: 10px;
+        box-shadow: 0 0 15px var(--primary-gold);
+    }
+
+    /* Image Grid in Modal */
+    .modal-image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        padding: 0 20px;
+    }
+
+    .modal-image-grid img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 3px solid rgba(244, 196, 48, 0.3);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        animation: imageReveal 0.5s ease-out backwards;
+    }
+
+    @keyframes imageReveal {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .modal-image-grid img:nth-child(1) { animation-delay: 0.05s; }
+    .modal-image-grid img:nth-child(2) { animation-delay: 0.1s; }
+    .modal-image-grid img:nth-child(3) { animation-delay: 0.15s; }
+    .modal-image-grid img:nth-child(4) { animation-delay: 0.2s; }
+    .modal-image-grid img:nth-child(5) { animation-delay: 0.25s; }
+    .modal-image-grid img:nth-child(6) { animation-delay: 0.3s; }
+
+    .modal-image-grid img:hover {
+        transform: scale(1.1) rotate(3deg);
+        box-shadow: 0 15px 50px rgba(244, 196, 48, 0.6);
+        border-color: var(--primary-gold);
+        z-index: 10;
+    }
+
+    /* Full Image Viewer */
+    .image-viewer {
+        display: none;
+        position: fixed;
+        z-index: 3000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.98);
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(20px);
+    }
+
+    .image-viewer.active {
+        display: flex;
+        animation: fadeIn 0.3s ease;
+    }
+
+    .viewer-image-container {
+        position: relative;
+        max-width: 95%;
+        max-height: 90%;
+        animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes zoomIn {
+        from {
+            transform: scale(0.5);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    .image-viewer img {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 15px;
+        box-shadow: 0 0 80px rgba(244, 196, 48, 0.5);
+        border: 5px solid var(--primary-gold);
+    }
+
+    .close-viewer {
+        position: fixed;
+        top: 30px;
+        right: 50px;
+        color: var(--primary-gold);
+        font-size: 60px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 3001;
+        transition: all 0.3s;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(244, 196, 48, 0.1);
+        border-radius: 50%;
+        backdrop-filter: blur(10px);
+    }
+
+    .close-viewer:hover {
+        color: #fff;
+        transform: rotate(90deg) scale(1.2);
+        background: var(--primary-gold);
+        box-shadow: 0 0 30px var(--primary-gold);
+    }
+
+    /* Navigation Arrows for Image Viewer */
+    .viewer-nav {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-gold);
+        font-size: 50px;
+        cursor: pointer;
+        padding: 20px;
+        user-select: none;
+        transition: all 0.3s;
+        z-index: 3001;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(244, 196, 48, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 50%;
+    }
+
+    .viewer-nav:hover {
+        color: #fff;
+        background: var(--primary-gold);
+        transform: translateY(-50%) scale(1.2);
+        box-shadow: 0 0 30px var(--primary-gold);
+    }
+
+    .viewer-prev {
+        left: 30px;
+    }
+
+    .viewer-next {
+        right: 30px;
+    }
+
+    /* Image Counter */
+    .image-counter {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--primary-gold);
+        font-size: 1.2rem;
+        font-weight: 700;
+        padding: 10px 30px;
+        background: rgba(244, 196, 48, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        border: 2px solid var(--primary-gold);
+        z-index: 3001;
+    }
+
+    /* Loading Animation */
+    .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(244, 196, 48, 0.3);
+        border-radius: 50%;
+        border-top-color: var(--primary-gold);
+        animation: spinner 0.8s linear infinite;
+    }
+
+    @keyframes spinner {
+        to { transform: rotate(360deg); }
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
         .gallery-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .gallery-title {
+            font-size: 2.5rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .top-nav {
+            padding: 15px 20px;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+        }
+
+        .home-link {
+            font-size: 0.9rem;
+            padding: 10px 20px;
+        }
+
+        .gallery-header {
+            margin-top: 100px;
+        }
+
+        .gallery-title {
+            font-size: 2rem;
+        }
+
+        .gallery-subtitle {
+            font-size: 1rem;
+        }
+
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .modal-image-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+        }
+
+        .close-modal,
+        .close-viewer {
+            font-size: 40px;
+            width: 50px;
+            height: 50px;
+            top: 20px;
+            right: 20px;
+        }
+
+        .viewer-nav {
+            font-size: 35px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .viewer-prev {
+            left: 15px;
+        }
+
+        .viewer-next {
+            right: 15px;
         }
     }
 
     @media (max-width: 480px) {
         .gallery-grid {
             grid-template-columns: 1fr;
+            gap: 20px;
         }
+        
+        .gallery-title {
+            font-size: 1.8rem;
+        }
+        
+        .modal-image-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-content {
+            padding: 20px;
+            margin-top: 80px;
+        }
+    }
+
+    /* Scroll to Top Button */
+    .scroll-top {
+        position: fixed;
+        bottom: 40px;
+        right: 40px;
+        width: 60px;
+        height: 60px;
+        background: var(--gold-gradient);
+        color: var(--dark-navy);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s;
+        z-index: 999;
+        box-shadow: 0 5px 20px rgba(244, 196, 48, 0.4);
+    }
+
+    .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .scroll-top:hover {
+        transform: translateY(-10px) scale(1.1);
+        box-shadow: 0 10px 40px rgba(244, 196, 48, 0.6);
     }
 </style>
 
 <!-- ====== GALLERY HTML ====== -->
+
+<!-- Top Navigation -->
+<div class="top-nav">
+    <div class="nav-logo">
+        <i class="fas fa-images"></i>
+        RTNHS Gallery
+    </div>
+    <a href="index.html" class="home-link">
+        <i class="fas fa-home"></i>
+        <span>Back to Home</span>
+    </a>
+</div>
+
 <div class="gallery-section">
-    <div class="gallery-title-container">
-        <!-- "Home" Link -->
-        <a href="index.html" class="home-link">Home</a>
-
-        <!-- Gallery Title -->
-        <h2 class="gallery-title">RTNHS Programs Gallery</h2>
+    <!-- Gallery Header -->
+    <div class="gallery-header">
+        <h1 class="gallery-title">Visual Journey</h1>
+        <p class="gallery-subtitle">Capturing Moments • Creating Memories</p>
     </div>
 
+    <!-- Gallery Grid -->
     <div class="gallery-grid">
-        <!-- Gallery Item 1 (Image) -->
-        <div class="gallery-item">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="images/imgintra (1).jfif" alt="School Event">
-                    <img src="images/imgintra (2).jfif" alt="School Event">
-                    <img src="images/imgintra (3).jfif" alt="School Event">
-                    <img src="images/imgintra (4).jfif" alt="School Event">
-                    <img src="images/imgintra (5).jfif" alt="School Event">
-                    <img src="images/imgintra (6).jfif" alt="School Event">
-                    <img src="images/imgintra (7).jfif" alt="School Event">
-                    <img src="images/imgintra (8).jfif" alt="School Event">
-                    <img src="images/imgintra (9).jfif" alt="School Event">
-                    <img src="images/imgintra (10).jfif" alt="School Event">
-                    <img src="images/imgintra (11).jfif" alt="School Event">
-                    <img src="images/imgintra (12).jfif" alt="School Event">
-                    <img src="images/imgintra (13).jfif" alt="School Event">
-                    <img src="images/imgintra (14).jfif" alt="School Event">
-                    <img src="images/imgintra (15).jfif" alt="School Event">                  
-                </div>
-                <div class="carousel-nav">
-                    <button id="prevBtn">&#10094;</button>
-                    <button id="nextBtn">&#10095;</button>
-                </div>
-                
-                
-            </div>
-            <div class="gallery-caption">School Program (Intramurals)</div>
-        </div>
-
-        <!-- Gallery Item 2 (Carousel for clean up drive) -->
-        <div class="gallery-item">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="images/imgcd (1).jfif" alt="School Event">
-                    <img src="images/imgcd (2).jfif" alt="School Event">
-                    <img src="images/imgcd (3).jfif" alt="School Event">
-                    <img src="images/imgcd (4).jfif" alt="School Event">
-                    <img src="images/imgcd (5).jfif" alt="School Event">
-                    <img src="images/imgcd (6).jfif" alt="School Event">
-                    <img src="images/imgcd (7).jfif" alt="School Event">
-                    <img src="images/imgcd (8).jfif" alt="School Event">
-                    <img src="images/imgcd (9).jfif" alt="School Event">
-                    <img src="images/imgcd (10).jfif" alt="School Event">
-                    <img src="images/imgcd (11).jfif" alt="School Event">
-                    <img src="images/imgcd (12).jfif" alt="School Event">
-                    <img src="images/imgcd (13).jfif" alt="School Event">
-                    <img src="images/imgcd (14).jfif" alt="School Event">
-                    <img src="images/imgcd (15).jfif" alt="School Event">
-                    <img src="images/imgcd (16).jfif" alt="School Event">
-                    <img src="images/imgcd (17).jfif" alt="School Event">
-                    <img src="images/imgcd (18).jfif" alt="School Event">
-                    <img src="images/imgcd (19).jfif" alt="School Event">
-                </div>
-                <div class="carousel-nav">
-                    <button id="prevBtn">&#10094;</button>
-                    <button id="nextBtn">&#10095;</button>
-                </div>
-                
-                
-            </div>
-            
-            
-
-            <div class="gallery-caption">School Event (clean up drive)</div>
-        </div>
-
-        <!-- Gallery Item 3 (Carousel for Science Camp) -->
-        <div class="gallery-item">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="images/img1sc.jfif" alt="Science Camp Image 1">
-                    <img src="images/img2sc.jfif" alt="Science Camp Image 2">
-                    <img src="images/img3sc (1).jfif" alt="Science Camp Image 3">
-                    <img src="images/img3sc (2).jfif" alt="Science Camp Image 4">
-                    <img src="images/img3sc (3).jfif" alt="Science Camp Image 5">
-                    <img src="images/img3sc (4).jfif" alt="Science Camp Image 6">
-                    <img src="images/img3sc (5).jfif" alt="Science Camp Image 7">
-                    <img src="images/img3sc (6).jfif" alt="Science Camp Image 8">
-                    <img src="images/img3sc (7).jfif" alt="Science Camp Image 9">
-                    <img src="images/img3sc (8).jfif" alt="Science Camp Image 10">
-                    <img src="images/img3sc (9).jfif" alt="Science Camp Image 11">
-                    <img src="images/img3sc (10).jfif" alt="Science Camp Image 12">
-                    <img src="images/img3sc (11).jfif" alt="Science Camp Image 13">
-                    <img src="images/img3sc (12).jfif" alt="Science Camp Image 14">
-                    <img src="images/img3sc (13).jfif" alt="Science Camp Image 15">
-                </div>
-                <div class="carousel-nav">
-                    <button id="prevBtn">&#10094;</button>
-                    <button id="nextBtn">&#10095;</button>
+        <!-- Gallery Item 1 - Intramurals -->
+        <div class="gallery-item" onclick="openModal(0)">
+            <div class="image-container">
+                <img src="images/imgintra (1).jfif" alt="Intramurals">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus overlay-icon"></i>
                 </div>
             </div>
-            <div class="gallery-caption">Students in Action (Science Camp)</div>
+            <div class="gallery-caption">
+                <i class="fas fa-trophy"></i> School Program (Intramurals)
+            </div>
         </div>
 
-         <!-- Gallery Item 4 (Carousel for red cross youth) -->
-
-         <div class="gallery-item">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="images/imgrc (1).jfif" alt="Science Camp Image 1">
-                    <img src="images/imgrc (2).jfif" alt="Science Camp Image 2">
-                    <img src="images/imgrc (3).jfif" alt="Science Camp Image 3">
-                    <img src="images/imgrc (4).jfif" alt="Science Camp Image 4">
-                    <img src="images/imgbs (5).jfif" alt="Science Camp Image 5">
-                    <img src="images/imgbs (6).jfif" alt="Science Camp Image 6">
-                    <img src="images/imgbs (7).jfif" alt="Science Camp Image 7">
-                    <img src="images/imgbs (8).jfif" alt="Science Camp Image 8">
-                    <img src="images/imgbs (9).jfif" alt="Science Camp Image 9">
-                    <img src="images/imgbs (10).jfif" alt="Science Camp Image 10">
-                    <img src="images/imgbs (11).jfif" alt="Science Camp Image 11">
-                    <img src="images/imgbs (12).jfif" alt="Science Camp Image 12">
-                    <img src="images/imgbs (13).jfif" alt="Science Camp Image 13"> 
-                    <img src="images/img3sc (12).jfif" alt="Science Camp Image 14">
-                    <img src="images/img3sc (13).jfif" alt="Science Camp Image 15">               
-                </div>
-                <div class="carousel-nav">
-                    <button id="prevBtn">&#10094;</button>
-                    <button id="nextBtn">&#10095;</button>
+        <!-- Gallery Item 2 - Clean Up Drive -->
+        <div class="gallery-item" onclick="openModal(1)">
+            <div class="image-container">
+                <img src="images/imgcd (1).jfif" alt="Clean Up Drive">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus overlay-icon"></i>
                 </div>
             </div>
-            <div class="gallery-caption">Red Cross Youth</div>
+            <div class="gallery-caption">
+                <i class="fas fa-leaf"></i> School Event (Clean Up Drive)
+            </div>
         </div>
 
-          <!-- Gallery Item 4 (Carousel for boys scout ) -->
-
-          
-         <div class="gallery-item">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="images/imgbs (1).jfif" alt="Science Camp Image 1">
-                    <img src="images/imgbs (2).jfif" alt="Science Camp Image 2">
-                    <img src="images/imgbs (3).jfif" alt="Science Camp Image 3">
-                    <img src="images/imgbs (4).jfif" alt="Science Camp Image 4">                   
-                </div>
-                <div class="carousel-nav">
-                    <button id="prevBtn">&#10094;</button>
-                    <button id="nextBtn">&#10095;</button>
+        <!-- Gallery Item 3 - Science Camp -->
+        <div class="gallery-item" onclick="openModal(2)">
+            <div class="image-container">
+                <img src="images/img1sc.jfif" alt="Science Camp">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus overlay-icon"></i>
                 </div>
             </div>
-            <div class="gallery-caption">Boys Scout (camp)</div>
+            <div class="gallery-caption">
+                <i class="fas fa-flask"></i> Students in Action (Science Camp)
+            </div>
         </div>
-        
-         <!-- Gallery Item 5 (Carousel for g11 teachers (2024-2025)) -->
 
-         <div class="gallery-item">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="images/imgtr (1).jfif" alt="Science Camp Image 1">
-                    <img src="images/imgtr (2).jfif" alt="Science Camp Image 2">
-                    <img src="images/imgtr (3).jfif" alt="Science Camp Image 3">
-                    <img src="images/imgtr (4).jfif" alt="Science Camp Image 4">
-                    <img src="images/imgtr (5).jfif" alt="Science Camp Image 5">
-                    <img src="images/imgtr (6).jfif" alt="Science Camp Image 6">
-                    <img src="images/imgtr (7).jfif" alt="Science Camp Image 7">
-                    <img src="images/imgtr (8).jfif" alt="Science Camp Image 8">
-                    <img src="images/imgtr (9).jfif" alt="Science Camp Image 9">
-                    <img src="images/imgtr (10).jfif" alt="Science Camp Image 10">
-                    <img src="images/imgtr (11).jfif" alt="Science Camp Image 11">
-                    <img src="images/imgtr (12).jfif" alt="Science Camp Image 12">
-                    <img src="images/imgtr (13).jfif" alt="Science Camp Image 13">      
-                    <img src="images/imgtr (14).jfif" alt="Science Camp Image 14">
-                    <img src="images/imgtr (15).jfif" alt="Science Camp Image 15">    
-                    <img src="images/1 (1).jfif" alt="Science Camp Image 16">
-                    <img src="images/1 (2).jfif" alt="Science Camp Image 17">
-                    <img src="images/1 (3).jfif" alt="Science Camp Image 18">
-                    <img src="images/1 (4).jfif" alt="Science Camp Image 19">
-                    <img src="images/1 (5).jfif" alt="Science Camp Image 20">
-                    <img src="images/1 (6).jfif" alt="Science Camp Image 21">
-                    <img src="images/1 (7).jfif" alt="Science Camp Image 22">
-                    <img src="images/1 (8).jfif" alt="Science Camp Image 23">
-                    <img src="images/1 (9).jfif" alt="Science Camp Image 24">
-                    <img src="images/1 (10).jfif" alt="Science Camp Image 25">
-                    <img src="images/1 (11).jfif" alt="Science Camp Image 26">
-                    <img src="images/1 (12).jfif" alt="Science Camp Image 27">
-                    <img src="images/1 (13).jfif" alt="Science Camp Image 28">      
-                    <img src="images/1 (14).jfif" alt="Science Camp Image 29">
-                    <img src="images/1 (15).jfif" alt="Science Camp Image 30">        
-                    <img src="images/1 (16).jfif" alt="Science Camp Image 31">
-                    <img src="images/1 (17).jfif" alt="Science Camp Image 32">
-                    <img src="images/1 (18).jfif" alt="Science Camp Image 33">
-                    <img src="images/1 (19).jfif" alt="Science Camp Image 34">
-                    <img src="images/1 (20).jfif" alt="Science Camp Image 35">
-                    <img src="images/1 (21).jfif" alt="Science Camp Image 36">
-                    <img src="images/1 (22).jfif" alt="Science Camp Image 37">
-                    <img src="images/1 (23).jfif" alt="Science Camp Image 38">
-                    <img src="images/1 (24).jfif" alt="Science Camp Image 39">
-                    <img src="images/1 (25).jfif" alt="Science Camp Image 40">
-                    <img src="images/1 (26).jfif" alt="Science Camp Image 41">
-                    <img src="images/1 (27).jfif" alt="Science Camp Image 42">
-                    <img src="images/1 (28).jfif" alt="Science Camp Image 43">      
-                    <img src="images/1 (29).jfif" alt="Science Camp Image 44">
-                    <img src="images/1 (30).jfif" alt="Science Camp Image 45">     
-                    <img src="images/1 (31).jfif" alt="Science Camp Image 46">
-                    <img src="images/1 (32).jfif" alt="Science Camp Image 47">
-                    <img src="images/1 (33).jfif" alt="Science Camp Image 48">
-                    <img src="images/1 (34).jfif" alt="Science Camp Image 49">                           
-                </div>
-                <div class="carousel-nav">
-                    <button id="prevBtn">&#10094;</button>
-                    <button id="nextBtn">&#10095;</button>
+        <!-- Gallery Item 4 - Red Cross Youth -->
+        <div class="gallery-item" onclick="openModal(3)">
+            <div class="image-container">
+                <img src="images/imgrc (1).jfif" alt="Red Cross Youth">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus overlay-icon"></i>
                 </div>
             </div>
-            <div class="gallery-caption">RTNHS(SHS) TEACHERS</div>
+            <div class="gallery-caption">
+                <i class="fas fa-heart"></i> Red Cross Youth
+            </div>
         </div>
 
-        <!-- Gallery Item 4 (Carousel for boys scout ) -->
-
-          
-        <div class="gallery-item">
-            <div class="carousel-container">
-                <div class="carousel-images">
-                    <img src="images/2 (1).jfif" alt="Science Camp Image 1">
-                    <img src="images/2 (2).jfif" alt="Science Camp Image 2">
-                    <img src="images/2 (3).jfif" alt="Science Camp Image 3">
-                    <img src="images/2 (4).jfif" alt="Science Camp Image 4">
-                    <img src="images/2 (5).jfif" alt="Science Camp Image 5">
-                    <img src="images/2 (6).jfif" alt="Science Camp Image 6">
-                    <img src="images/2 (7).jfif" alt="Science Camp Image 7">
-                    <img src="images/2 (8).jfif" alt="Science Camp Image 8">
-                    <img src="images/2 (9).jfif" alt="Science Camp Image 9">
-                    <img src="images/2 (10).jfif" alt="Science Camp Image 10">
-                    <img src="images/2 (11).jfif" alt="Science Camp Image 11">
-                    <img src="images/2 (12).jfif" alt="Science Camp Image 12">
-                    <img src="images/2 (13).jfif" alt="Science Camp Image 13">      
-                    <img src="images/2 (14).jfif" alt="Science Camp Image 14">                
-                </div>
-                <div class="carousel-nav">
-                    <button id="prevBtn">&#10094;</button>
-                    <button id="nextBtn">&#10095;</button>
+        <!-- Gallery Item 5 - Boys Scout Camp -->
+        <div class="gallery-item" onclick="openModal(4)">
+            <div class="image-container">
+                <img src="images/imgbs (1).jfif" alt="Boys Scout">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus overlay-icon"></i>
                 </div>
             </div>
-            <div class="gallery-caption">RTNHS Boys Scout (2025-2026)</div>
+            <div class="gallery-caption">
+                <i class="fas fa-campground"></i> Boys Scout (Camp)
+            </div>
         </div>
 
+        <!-- Gallery Item 6 - Teachers -->
+        <div class="gallery-item" onclick="openModal(5)">
+            <div class="image-container">
+                <img src="images/imgtr (1).jfif" alt="RTNHS Teachers">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus overlay-icon"></i>
+                </div>
+            </div>
+            <div class="gallery-caption">
+                <i class="fas fa-chalkboard-teacher"></i> RTNHS (SHS) Teachers
+            </div>
+        </div>
 
-        <!-- Additional Gallery Items can be added similarly -->
+        <!-- Gallery Item 7 - Boys Scout 2025-2026 -->
+        <div class="gallery-item" onclick="openModal(6)">
+            <div class="image-container">
+                <img src="images/2 (1).jfif" alt="Boys Scout 2025">
+                <div class="image-overlay">
+                    <i class="fas fa-search-plus overlay-icon"></i>
+                </div>
+            </div>
+            <div class="gallery-caption">
+                <i class="fas fa-star"></i> RTNHS Boys Scout (2025-2026)
+            </div>
+        </div>
     </div>
+</div>
+
+<!-- Scroll to Top Button -->
+<div class="scroll-top" onclick="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+</div>
+
+<!-- Modal for Gallery -->
+<div id="galleryModal" class="modal">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-image-grid" id="modalImageGrid"></div>
+    </div>
+</div>
+
+<!-- Image Viewer -->
+<div id="imageViewer" class="image-viewer">
+    <span class="close-viewer" onclick="closeViewer()">&times;</span>
+    <span class="viewer-nav viewer-prev" onclick="changeImage(-1)">
+        <i class="fas fa-chevron-left"></i>
+    </span>
+    <div class="viewer-image-container">
+        <img id="viewerImage" src="" alt="Full Image">
+    </div>
+    <span class="viewer-nav viewer-next" onclick="changeImage(1)">
+        <i class="fas fa-chevron-right"></i>
+    </span>
+    <div class="image-counter" id="imageCounter">1 / 1</div>
 </div>
 
 <!-- ====== GALLERY SCRIPT ====== -->
 <script>
-    // Select all carousel containers
-    const carousels = document.querySelectorAll('.carousel-container');
+    // Particle Canvas Animation
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    carousels.forEach(carousel => {
-        const imagesContainer = carousel.querySelector('.carousel-images');
-        const images = imagesContainer.querySelectorAll('img');
-        const prevBtn = carousel.querySelector('.carousel-nav button:first-child');
-        const nextBtn = carousel.querySelector('.carousel-nav button:last-child');
-        let currentIndex = 0;
-        const totalImages = images.length;
+    const particles = [];
+    const particleCount = 50;
 
-        function updateCarousel() {
-            const offset = -currentIndex * 100;
-            imagesContainer.style.transform = `translateX(${offset}%)`;
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 3 + 1;
+            this.speedX = Math.random() * 1 - 0.5;
+            this.speedY = Math.random() * 1 - 0.5;
+            this.opacity = Math.random() * 0.5 + 0.2;
         }
 
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex === 0) ? totalImages - 1 : currentIndex - 1;
-            updateCarousel();
-        });
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
 
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
-            updateCarousel();
-        });
+            if (this.x > canvas.width) this.x = 0;
+            if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            if (this.y < 0) this.y = canvas.height;
+        }
 
-        // Optional: auto-slide every 3 seconds
-        setInterval(() => {
-            currentIndex = (currentIndex === totalImages - 1) ? 0 : currentIndex + 1;
-            updateCarousel();
-        }, 3000);
+        draw() {
+            ctx.fillStyle = `rgba(244, 196, 48, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function initParticles() {
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+            particle.update();
+            particle.draw();
+        });
+        requestAnimationFrame(animateParticles);
+    }
+
+    initParticles();
+    animateParticles();
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+
+    // Gallery data
+    const galleries = [
+        {
+            title: "School Program (Intramurals)",
+            images: [
+                "images/imgintra (1).jfif", "images/imgintra (2).jfif", "images/imgintra (3).jfif",
+                "images/imgintra (4).jfif", "images/imgintra (5).jfif", "images/imgintra (6).jfif",
+                "images/imgintra (7).jfif", "images/imgintra (8).jfif", "images/imgintra (9).jfif",
+                "images/imgintra (10).jfif", "images/imgintra (11).jfif", "images/imgintra (12).jfif",
+                "images/imgintra (13).jfif", "images/imgintra (14).jfif", "images/imgintra (15).jfif"
+            ]
+        },
+        {
+            title: "School Event (Clean Up Drive)",
+            images: [
+                "images/imgcd (1).jfif", "images/imgcd (2).jfif", "images/imgcd (3).jfif",
+                "images/imgcd (4).jfif", "images/imgcd (5).jfif", "images/imgcd (6).jfif",
+                "images/imgcd (7).jfif", "images/imgcd (8).jfif", "images/imgcd (9).jfif",
+                "images/imgcd (10).jfif", "images/imgcd (11).jfif", "images/imgcd (12).jfif",
+                "images/imgcd (13).jfif", "images/imgcd (14).jfif", "images/imgcd (15).jfif",
+                "images/imgcd (16).jfif", "images/imgcd (17).jfif", "images/imgcd (18).jfif",
+                "images/imgcd (19).jfif"
+            ]
+        },
+        {
+            title: "Students in Action (Science Camp)",
+            images: [
+                "images/img1sc.jfif", "images/img2sc.jfif", "images/img3sc (1).jfif",
+                "images/img3sc (2).jfif", "images/img3sc (3).jfif", "images/img3sc (4).jfif",
+                "images/img3sc (5).jfif", "images/img3sc (6).jfif", "images/img3sc (7).jfif",
+                "images/img3sc (8).jfif", "images/img3sc (9).jfif", "images/img3sc (10).jfif",
+                "images/img3sc (11).jfif", "images/img3sc (12).jfif", "images/img3sc (13).jfif"
+            ]
+        },
+        {
+            title: "Red Cross Youth",
+            images: [
+                "images/imgrc (1).jfif", "images/imgrc (2).jfif", "images/imgrc (3).jfif",
+                "images/imgrc (4).jfif", "images/imgbs (5).jfif", "images/imgbs (6).jfif",
+                "images/imgbs (7).jfif", "images/imgbs (8).jfif", "images/imgbs (9).jfif",
+                "images/imgbs (10).jfif", "images/imgbs (11).jfif", "images/imgbs (12).jfif",
+                "images/imgbs (13).jfif", "images/img3sc (12).jfif", "images/img3sc (13).jfif"
+            ]
+        },
+        {
+            title: "Boys Scout (Camp)",
+            images: [
+                "images/imgbs (1).jfif", "images/imgbs (2).jfif", "images/imgbs (3).jfif",
+                "images/imgbs (4).jfif"
+            ]
+        },
+        {
+            title: "RTNHS (SHS) Teachers",
+            images: [
+                "images/imgtr (1).jfif", "images/imgtr (2).jfif", "images/imgtr (3).jfif",
+                "images/imgtr (4).jfif", "images/imgtr (5).jfif", "images/imgtr (6).jfif",
+                "images/imgtr (7).jfif", "images/imgtr (8).jfif", "images/imgtr (9).jfif",
+                "images/imgtr (10).jfif", "images/imgtr (11).jfif", "images/imgtr (12).jfif",
+                "images/imgtr (13).jfif", "images/imgtr (14).jfif", "images/imgtr (15).jfif",
+                "images/1 (1).jfif", "images/1 (2).jfif", "images/1 (3).jfif",
+                "images/1 (4).jfif", "images/1 (5).jfif", "images/1 (6).jfif",
+                "images/1 (7).jfif", "images/1 (8).jfif", "images/1 (9).jfif",
+                "images/1 (10).jfif", "images/1 (11).jfif", "images/1 (12).jfif",
+                "images/1 (13).jfif", "images/1 (14).jfif", "images/1 (15).jfif",
+                "images/1 (16).jfif", "images/1 (17).jfif", "images/1 (18).jfif",
+                "images/1 (19).jfif", "images/1 (20).jfif", "images/1 (21).jfif",
+                "images/1 (22).jfif", "images/1 (23).jfif", "images/1 (24).jfif",
+                "images/1 (25).jfif", "images/1 (26).jfif", "images/1 (27).jfif",
+                "images/1 (28).jfif", "images/1 (29).jfif", "images/1 (30).jfif",
+                "images/1 (31).jfif", "images/1 (32).jfif", "images/1 (33).jfif"
+            ]
+        },
+        {
+            title: "RTNHS Boys Scout (2025-2026)",
+            images: [
+                "images/2 (1).jfif", "images/2 (2).jfif", "images/2 (3).jfif",
+                "images/2 (4).jfif", "images/2 (5).jfif", "images/2 (6).jfif",
+                "images/2 (7).jfif", "images/2 (8).jfif", "images/2 (9).jfif",
+                "images/2 (10).jfif", "images/2 (11).jfif", "images/2 (12).jfif",
+                "images/2 (13).jfif", "images/2 (14).jfif"
+            ]
+        }
+    ];
+
+    let currentGallery = [];
+    let currentImageIndex = 0;
+
+    function openModal(galleryIndex) {
+        const gallery = galleries[galleryIndex];
+        currentGallery = gallery.images;
+        
+        document.getElementById('modalTitle').textContent = gallery.title;
+        
+        const grid = document.getElementById('modalImageGrid');
+        grid.innerHTML = '';
+        
+        gallery.images.forEach((img, index) => {
+            const imgElement = document.createElement('img');
+            imgElement.src = img;
+            imgElement.alt = gallery.title;
+            imgElement.onclick = () => openViewer(index);
+            grid.appendChild(imgElement);
+        });
+        
+        document.getElementById('galleryModal').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        document.getElementById('galleryModal').classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+
+    function openViewer(imageIndex) {
+        currentImageIndex = imageIndex;
+        document.getElementById('viewerImage').src = currentGallery[currentImageIndex];
+        updateCounter();
+        document.getElementById('imageViewer').classList.add('active');
+    }
+
+    function closeViewer() {
+        document.getElementById('imageViewer').classList.remove('active');
+    }
+
+    function changeImage(direction) {
+        currentImageIndex += direction;
+        
+        if (currentImageIndex < 0) {
+            currentImageIndex = currentGallery.length - 1;
+        } else if (currentImageIndex >= currentGallery.length) {
+            currentImageIndex = 0;
+        }
+        
+        document.getElementById('viewerImage').src = currentGallery[currentImageIndex];
+        updateCounter();
+    }
+
+    function updateCounter() {
+        document.getElementById('imageCounter').textContent = 
+            `${currentImageIndex + 1} / ${currentGallery.length}`;
+    }
+
+    // Scroll to top functionality
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Show/hide scroll to top button
+    window.addEventListener('scroll', () => {
+        const scrollTop = document.querySelector('.scroll-top');
+        if (window.pageYOffset > 300) {
+            scrollTop.classList.add('visible');
+        } else {
+            scrollTop.classList.remove('visible');
+        }
+    });
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('galleryModal');
+        const viewer = document.getElementById('imageViewer');
+        
+        if (event.target == modal) {
+            closeModal();
+        }
+        if (event.target == viewer) {
+            closeViewer();
+        }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        const viewer = document.getElementById('imageViewer');
+        if (viewer.classList.contains('active')) {
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
+            if (e.key === 'Escape') closeViewer();
+        }
+        
+        const modal = document.getElementById('galleryModal');
+        if (modal.classList.contains('active') && e.key === 'Escape') {
+            closeModal();
+        }
     });
 </script>
+
+</body>
+</html>

@@ -1,286 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>About Us | Ramon Torres National High School</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>About Us | Ramon Torres National High School</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <style>
-        :root {
-            --yellow: #f4c430;
-            --dark-yellow: #d4a017;
-            --navy: #0f2a44;
-            --navy-light: #163a5f;
-            --bg-light: #f6f7f9;
-            --text-dark: #333;
-        }
+<style>
+:root {
+    --primary-gold: #f4c430;
+    --dark-navy: #0f2a44;
+    --navy-light: #1a3a5c;
+    --gold-gradient: linear-gradient(135deg, #f4c430, #ffd700);
+}
 
-        * {
-            box-sizing: border-box;
-        }
+/* RESET */
+* { margin:0; padding:0; box-sizing:border-box; }
 
-        body {
-            font-family: "Segoe UI", Arial, Helvetica, sans-serif;
-            margin: 0;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.7;
-        }
+/* BODY */
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg,#0a1929,#1a2332,#0a1929);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-        /* HEADER */
-        header {
-            background: linear-gradient(135deg, var(--yellow), var(--dark-yellow));
-            padding: 28px 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-        }
+@keyframes gradientShift {
+    0%,100%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+}
 
-        .header-content {
-            max-width: 1100px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+/* PARTICLES */
+#particleCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    opacity: .3;
+}
 
-        .header-title h1 {
-            margin: 0;
-            font-size: 1.9rem;
-            color: #000;
-        }
+/* ORBS */
+.gradient-orbs {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+.orb {
+    position:absolute;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.15;
+    animation: float-orb 25s infinite ease-in-out;
+}
+.orb-1 {width:400px;height:400px;background:#f4c430;top:10%;left:-100px;}
+.orb-2 {width:500px;height:500px;background:#ffd700;bottom:10%;right:-150px;}
+.orb-3 {width:350px;height:350px;background:#1a3a5c;top:50%;left:50%;}
+.orb-4 {width:450px;height:450px;background:#f4c430;bottom:30%;left:20%;}
 
-        .header-title p {
-            margin: 6px 0 0;
-            font-size: 0.95rem;
-            color: #222;
-        }
+@keyframes float-orb {
+    50% { transform: translate(120px,-80px) scale(1.1); }
+}
 
-        nav a {
-            text-decoration: none;
-            color: #000;
-            font-weight: 600;
-            margin-left: 15px;
-            padding: 8px 14px;
-            border-radius: 6px;
-            transition: background 0.3s, transform 0.2s;
-        }
+/* HEADER */
+header {
+    background: rgba(15,42,68,.9);
+    backdrop-filter: blur(15px);
+    padding: 25px;
+    box-shadow: 0 5px 30px rgba(0,0,0,.3);
+}
 
-        nav a:hover,
-        nav a:focus {
-            background: rgba(0,0,0,0.12);
-            transform: translateY(-1px);
-        }
+.header-content {
+    max-width:1100px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 
-        /* MAIN CONTENT */
-        main {
-            max-width: 1000px;
-            margin: 35px auto;
-            padding: 0 20px;
-        }
+.header-title h1 {
+    font-size:1.8rem;
+    background: var(--gold-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
 
-        section {
-            background: #fff;
-            padding: 28px;
-            margin-bottom: 30px;
-            border-radius: 12px;
-            border-left: 6px solid var(--yellow);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-        }
+.header-title p {
+    opacity:.85;
+    font-size: .9rem;
+}
 
-        section h2 {
-            margin-top: 0;
-            color: var(--navy);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
+nav a {
+    color:#0f2a44;
+    background: var(--gold-gradient);
+    padding:10px 22px;
+    border-radius:30px;
+    font-weight:700;
+    text-decoration:none;
+    transition: all .3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
 
-        section h3 {
-            color: var(--navy-light);
-            margin-top: 20px;
-        }
+nav a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,.35);
+}
 
-        ul {
-            padding-left: 22px;
-        }
+/* MAIN */
+main {
+    max-width:1000px;
+    margin:80px auto;
+    padding:0 20px;
+}
 
-        ul li {
-            margin-bottom: 8px;
-        }
+/* GLASS SECTIONS */
+section {
+    background: rgba(255,255,255,.08);
+    backdrop-filter: blur(12px);
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:35px;
+    border:2px solid rgba(244,196,48,.25);
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    animation: fadeUp .8s ease both;
+}
 
-        /* MISSION / VISION */
-        .statement {
-            background: #f9fafb;
-            padding: 18px;
-            border-radius: 8px;
-            margin-top: 12px;
-        }
+@keyframes fadeUp {
+    from {opacity:0; transform:translateY(40px)}
+    to {opacity:1; transform:translateY(0)}
+}
 
-        /* MAP */
-        .map-container {
-            width: 100%;
-            height: 450px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
+section h2 {
+    color: var(--primary-gold);
+    margin-bottom:15px;
+}
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
+section h3 {
+    margin-top:20px;
+    color:#ffd700;
+}
 
-        /* FOOTER */
-        footer {
-            background: var(--navy);
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            font-size: 0.9rem;
-        }
+ul { padding-left:20px; }
+li { margin-bottom:8px; }
 
-        /* RESPONSIVE */
-        @media (max-width: 600px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-            }
+/* MAP FIX */
+.map-container {
+    margin-top: 20px;
+    width: 100%;
+    height: 380px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 2px solid rgba(244,196,48,.35);
+    box-shadow: 0 15px 40px rgba(0,0,0,.4);
+}
 
-            nav {
-                margin-top: 15px;
-            }
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
 
-            nav a {
-                margin: 0 8px;
-            }
-        }
-    </style>
+/* FOOTER */
+footer {
+    text-align:center;
+    padding:25px;
+    opacity:.7;
+    font-size:.9rem;
+}
+</style>
 </head>
 
 <body>
 
+<canvas id="particleCanvas"></canvas>
+
+<div class="gradient-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+</div>
+
 <header>
-    <div class="header-content">
-        <div class="header-title">
-            <h1>Ramon Torres National High School</h1>
-            <p>Bago City, Negros Occidental</p>
-        </div>
-        <nav aria-label="Main Navigation">
-            <a href="index.html">Home</a>
-        </nav>
+<div class="header-content">
+    <div class="header-title">
+        <h1>Ramon Torres National High School</h1>
+        <p>Bago City, Negros Occidental</p>
     </div>
+    <nav>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </nav>
+</div>
 </header>
 
 <main>
 
-    <section>
-        <h2>About Our School</h2>
-        <p>
-            Ramon Torres National High School (RTNHS) is a public secondary school located in
-            Bago City, Negros Occidental, Philippines. It offers Grades 7 to 12 under the
-            Department of Education’s K–12 Basic Education Program.
-        </p>
-        <p>
-            Established in 1947, the school is named after its founder, Ex-Senator Ramon Torres,
-            and has since grown into one of the major public high schools in the city.
-        </p>
-    </section>
+<section>
+<h2>About Our School</h2>
+<p>Ramon Torres National High School (RTNHS) is a public secondary school in Bago City, Negros Occidental.</p>
+<p>Established in 1947, it is named after Ex-Senator Ramon Torres.</p>
+</section>
 
-    <section>
-        <h2>Senior High School Program</h2>
-        <p>
-            RTNHS offers a comprehensive Senior High School (Grades 11–12) program that equips
-            students for higher education, employment, or entrepreneurship.
-        </p>
+<section>
+<h2>Mission, Vision & Core Values</h2>
 
-        <h3>Core SHS Subjects</h3>
-        <ul>
-            <li>Oral Communication</li>
-            <li>General Mathematics</li>
-            <li>Science and Technology</li>
-            <li>Personal Development</li>
-            <li>21st Century Communication Skills</li>
-        </ul>
-    </section>
+<h3>DepEd Mission</h3>
+<ul>
+<li>To protect and promote the right of every Filipino to quality, equitable, culture-based, and complete basic education.</li>
+<li>Students learn in a child-friendly, gender-sensitive, safe, and motivating environment.</li>
+<li>Teachers facilitate learning and constantly nurture every learner.</li>
+<li>Administrators and staff ensure a supportive learning environment.</li>
+</ul>
 
-    <section>
-        <h2>Mission, Vision & Core Values</h2>
+<h3>DepEd Vision</h3>
+<ul>
+<li>Filipinos who love their country and contribute meaningfully to nation-building.</li>
+<li>A learner-centered institution that continuously improves.</li>
+</ul>
 
-        <h3>DepEd Mission</h3>
-        <div class="statement">
-            <p>
-                <ul>To protect and promote the right of every Filipino to quality, equitable, culture-based, and complete basic education where: <br>
-                    Students learn in a child-friendly, gender-sensitive, safe, and motivating environment.<br>
-                    Teachers facilitate learning and constantly nurture every learner.<br>
-                    Administrators and staff, as stewards of the institution, ensure an enabling and supportive environment for effective learning to happen.<br></ul>
-                
-            </p>
-        </div>
+<h3>Core Values</h3>
+<ul>
+<li>Maka-Diyos</li>
+<li>Maka-Tao</li>
+<li>Maka-Kalikasan</li>
+<li>Maka-Bansa</li>
+</ul>
+</section>
 
-        <h3>DepEd Vision</h3>
-        <div class="statement">
-            <p>
-                <ul>  We dream of Filipinos who passionately love their country and whose competencies and values enable them to realize their full potential and contribute meaningfully to building the nation.<br>
-                    As a learner-centered public institution, the Department of Education continuously improves itself to better serve its stakeholders.</ul>
-              
-            </p>
-        </div>
+<section>
+<h2>Academic Programs</h2>
 
-        <h3>Core Values</h3>
-        <ul>
-            <li>Maka-Diyos</li>
-            <li>Maka-Tao</li>
-            <li>Maka-Kalikasan</li>
-            <li>Maka-Bansa</li>
-        </ul>
-    </section>
+<h3>Academic Track</h3>
+<ul>
+<li>STEM – Science, Technology, Engineering, Mathematics</li>
+<li>ABM – Accountancy, Business, Management</li>
+<li>HUMSS – Humanities and Social Sciences</li>
+<li>GAS – General Academic Strand</li>
+</ul>
 
-    <section>
-        <h2>Academic Programs</h2>
+<h3>Technical-Vocational-Livelihood (TVL) Track</h3>
+<ul>
+<li>Cookery</li>
+<li>Tailoring</li>
+<li>Electrical Installation & Maintenance (EIM)</li>
+<li>Shielded Metal Arc Welding (SMAW)</li>
+</ul>
 
-        <h3>Academic Track</h3>
-        <ul>
-            <li>STEM – Science, Technology, Engineering, Mathematics</li>
-            <li>ABM – Accountancy, Business, Management</li>
-            <li>HUMSS – Humanities and Social Sciences</li>
-            <li>GAS – General Academic Strand</li>
-        </ul>
+<p>Senior High School students also undergo work immersion with partner organizations.</p>
+</section>
 
-        <h3>Technical-Vocational-Livelihood (TVL) Track</h3>
-        <ul>
-            <li>Cookery</li>
-            <li>Tailoring</li>
-            <li>Electrical Installation & Maintenance (EIM)</li>
-            <li>Shielded Metal Arc Welding (SMAW)</li>
-        </ul>
+<section>
+<h2>
+<i class="fa-solid fa-location-dot" style="margin-right:8px;"></i>
+Our Location
+</h2>
 
-        <p>
-            Senior High School students also undergo work immersion with partner organizations
-            to gain valuable real-world experience.
-        </p>
-    </section>
-
-    <section>
-        <h2>Our Location <i class="fa-solid fa-location-dot"></i></h2>
-        <div class="map-container">
-            <iframe
-                src="https://www.google.com/maps?q=Ramon%20Torres%20National%20High%20School%20Bago&output=embed"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                title="Ramon Torres National High School Location">
-            </iframe>
-        </div>
-    </section>
+<div class="map-container">
+<iframe
+src="https://www.google.com/maps?q=Ramon%20Torres%20National%20High%20School%20Bago&output=embed"
+loading="lazy"
+referrerpolicy="no-referrer-when-downgrade"
+title="Ramon Torres National High School Location">
+</iframe>
+</div>
+</section>
 
 </main>
 
 <footer>
-    © 2026 Ramon Torres National High School. All Rights Reserved.
+© 2026 Ramon Torres National High School
 </footer>
+
+<script>
+const canvas=document.getElementById("particleCanvas"),ctx=canvas.getContext("2d");
+canvas.width=innerWidth; canvas.height=innerHeight;
+let p=[];
+for(let i=0;i<50;i++) p.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,s:Math.random()*3});
+function anim(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+p.forEach(a=>{
+a.x+=.3;a.y+=.3;
+if(a.x>innerWidth)a.x=0;
+if(a.y>innerHeight)a.y=0;
+ctx.fillStyle="rgba(244,196,48,.4)";
+ctx.beginPath();
+ctx.arc(a.x,a.y,a.s,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(anim);
+}
+anim();
+</script>
 
 </body>
 </html>
